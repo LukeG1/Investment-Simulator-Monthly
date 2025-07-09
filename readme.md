@@ -40,6 +40,8 @@ There will be 2 modes of operation, when exploring differnt paths, the only thin
 
 # Data Locations
 
+> Eventually I'd like to compile all the needed outside data into a single sqllite db that could be frequently updated in a semi automatic way
+
 ## Historic Data
 
 -   [CPI](https://fred.stlouisfed.org/series/CPIAUCSL) 1950+
@@ -64,11 +66,12 @@ There will be 2 modes of operation, when exploring differnt paths, the only thin
 
 > TBD
 
-## Life Expectancy
+## Life Expectancy / Health
 
 -   [Male](https://www.mortality.org/File/GetDocument/hmd.v6/USA/STATS/mltper_1x1.txt)
 -   [Female](https://www.mortality.org/File/GetDocument/hmd.v6/USA/STATS/fltper_1x1.txt)
 -   Still looking for data on multipliers for good or poor habits / health / family history
+-   Still looking for data on medical expenses?
 
 # Project Structure
 
@@ -83,7 +86,7 @@ A household tracks a list of household factors, each being something that affect
 ## Ecnomic Factor
 
 An economic factor is where the historic data comes in. An example would be inflation. For each month of the simulation a new return value for each economic factor is detirmined, and that is used to increment a household's portfolio
-The return values will be generated with Geometric Brownian Motion CITATION OR SOMRTHING BETTER
+The return values will be generated with Geometric Brownian Motion (GBM) CITATION OR SOMRTHING BETTER
 
 ## Account
 
@@ -95,7 +98,13 @@ Each account holds a series of investments based on what is allowed by the accou
 
 ## Simulation
 
-This takes a household and data informed economic factors to run actual month by month simulations on a household until life expectancy, repeating until some count or stability metric is reached. Each thread can contain it's own simulation with copies of the source household and economic factors
+This takes a household and data informed economic factors to run actual month by month simulations on a household until life expectancy, repeating until some count or stability metric is reached. Each thread can contain it's own simulation with copies of the source household and seeds of randomness for the economic factors and life expectancy
+
+## Structure
+
+thread 1: data collection thread
+thread 2: historic data simulation thread
+thread 3+: simulation threads
 
 # Figuring out the inputs
 
@@ -114,3 +123,7 @@ choose what to save, like maybe only save means to save time for each investment
 
 1. Get a multithreded loop going over a number of years, over a number of sims
 2. Get various kinds of historic data reading into c++ economic factors with GBM
+
+while simulating, when accessing an economic factor you would do something like this:
+stock_market.return(random_seed, month_index)
+or at least that would be nice
