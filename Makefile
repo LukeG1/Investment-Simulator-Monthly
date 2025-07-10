@@ -3,44 +3,53 @@ CXX = g++
 CXXFLAGS_DEBUG = -Wall -Iinclude -g -std=c++20
 CXXFLAGS_FAST  = -Wall -Iinclude -O3 -DNDEBUG -std=c++20
 
-# Mode selection
-MODE ?= debug
+# Build Directory
+BUILD_DIR = build
 
-ifeq ($(MODE),debug)
-	CXXFLAGS := $(CXXFLAGS_DEBUG)
-else ifeq ($(MODE),fast)
-	CXXFLAGS := $(CXXFLAGS_FAST)
-else
-	$(error Unknown MODE '$(MODE)'. Valid options are 'debug' or 'fast')
-endif
+# Source files: find all .cpp files recursively in src/
+SRC = $(shell find src -name "*.cpp")
 
-# File and target definitions
-SRC = $(wildcard src/*.cpp)
-OBJ = $(SRC:.cpp=.o)
-TARGET = build/my_program
+# Object files: replace src/ with $(BUILD_DIR)/ and .cpp with .o
+OBJ = $(patsubst src/%.cpp,$(BUILD_DIR)/%.o,$(SRC))
 
-# Force rebuild if MODE changes
-MODE_FILE = build/.mode_$(MODE)
+# Target executable name
+TARGET = $(BUILD_DIR)/my_program
 
-all: $(TARGET)
+.PHONY: all debug fast clean pre-build run
 
-# Rule to build the target
-$(TARGET): $(SRC) $(MODE_FILE)
-	@mkdir -p build
-	$(CXX) $(CXXFLAGS) $(SRC) -o $(TARGET)
+# Default target: debug build
+all debug: CXXFLAGS = $(CXXFLAGS_DEBUG)
+all debug: pre-build $(TARGET) # Add pre-build dependency here
 
-# Create a marker file to track the current mode
-$(MODE_FILE):
-	@mkdir -p build
-	@rm -f build/.mode_*  # Remove old mode marker
-	@touch $@
+# Fast target: optimized build
+fast: CXXFLAGS = $(CXXFLAGS_FAST)
+fast: pre-build $(TARGET) # Add pre-build dependency here
 
+# Pre-build step to clean the build directory
+pre-build:
+	@echo "Cleaning build directory before build..."
+	@rm -rf $(BUILD_DIR)
+	@mkdir -p $(BUILD_DIR)
+
+# Rule to create the build directory (redundant with pre-build, but harmless)
+$(BUILD_DIR):
+	@mkdir -p $@
+
+# Rule to compile individual source files into object files
+$(BUILD_DIR)/%.o: src/%.cpp | $(BUILD_DIR)
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Rule to link object files into the final executable
+$(TARGET): $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $@
+
+# Run the compiled program (now uses the fast build)
+run: fast # Ensure the program is built in fast mode
+	@echo "Running $(TARGET)..."
+	@./$(TARGET)
+
+# Clean up build artifacts (for manual cleaning)
 clean:
-	rm -f build/my_program build/.mode_*
-
-# Shortcuts
-fast:
-	$(MAKE) MODE=fast
-
-debug:
-	$(MAKE) MODE=debug
+	@echo "Manually cleaning build directory..."
+	@rm -rf $(BUILD_DIR)

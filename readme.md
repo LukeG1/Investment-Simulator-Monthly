@@ -1,6 +1,6 @@
 # Motivation
 
-I've struggled over decisions like Roth or traditional, rent or buy, stock bond ratios, standard or itemized, when to start social secutiry benifits, and countless more. Every answer to these questions is probably the best choise for someone, but you still hear people saying oposite things to people in the same situation. I think that is partially because people have different goals, which is valid, but it's also becauase most people are making educated guesses based on gut feeling. I want a more empirically proven answer if I'm going to steak my livelehood on it. While this project obviosly wouldnt be the first to do such a thing, I want it to be comprehensive and simple enough to not just answer questions like these, but provide an optimal path based on anyone's inputs, to achieve thier goals.
+I've struggled over decisions like Roth or traditional, rent or buy, stock bond ratios, standard or itemized, when to start social secutiry benifits, are annuities a scam, and countless more. Every answer to these questions is probably the best choise for someone, but you still hear people saying oposite things to people in the same situation. I think that is partially because people have different goals, which is valid, but it's also becauase most people are making educated guesses based on gut feeling. I want a more empirically proven answer if I'm going to steak my livelehood on it. While this project obviosly wouldnt be the first to do such a thing, I want it to be comprehensive and simple enough to not just answer questions like these, but provide an optimal path based on anyone's inputs, to achieve thier goals.
 
 # Overview
 
@@ -118,6 +118,9 @@ runs based on a configuration file that has all the input info and settings for 
 choose what to save, like maybe only save means to save time for each investment to avoid complication
 
 # My notes:
+
+-   Period_Life_Data could be used in an inheritance account to represent the parent
+-   also the 'household' may technically need 2 of them for the 2 members
 
 ## Steps
 
