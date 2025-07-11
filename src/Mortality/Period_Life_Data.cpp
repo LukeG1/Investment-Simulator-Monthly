@@ -49,7 +49,6 @@ Period_Life_Data::Period_Life_Data(int birth_year, Sex sex)
                 std::string last_number_str = line.substr(last_comma_pos + 1);
                 float qx = std::stod(last_number_str);
                 probabilities_by_age[i] = qx;
-                // std::cout << i << " | " << chances[i] << std::endl;
             }
             else
             {

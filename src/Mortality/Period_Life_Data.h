@@ -23,7 +23,6 @@ public:
     bool did_die_at_age(int age);
 
 private:
-    // TODO: rename
     std::array<float, DATA_MAX_AGE> probabilities_by_age;
     static std::uniform_real_distribution<double> dist;
 };
