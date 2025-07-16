@@ -1,5 +1,8 @@
 #pragma once
 #include "Accounts/Account.h"
+#include "json.hpp"
+#include "Mortality/Period_Life_Data.h"
+#include <string>
 
 #define ACCOUNT(type) (household.accounts[static_cast<int>(type)])
 
@@ -14,13 +17,22 @@
 class Household
 {
 public:
-    Household(int starting_age_years, int starting_age_months, int starting_income);
+    // Household(int starting_age_years, int starting_age_months, int starting_income);
+    Household(std::string spec_path);
     // A household should have all the accounts wheather or not they are used for simplicity
     // different strategies may end up employing different accounts
     std::array<Account *, 5> accounts{};
-    const int starting_age_years;
-    const int starting_age_months;
-    const int starting_income;
+    // TODO: would be nice if these could be const
+    // TODO: extract into a contributor list?
+    int birth_year;
+    int starting_age_years;
+    int starting_age_months;
+    int starting_income;
+    Sex sex;
+
+    Period_Life_Data *period_life_data; // TODO: this should be a vector of period life data for each contributor
 
     // TODO: household debug print function
 };
+
+extern thread_local Household *household;

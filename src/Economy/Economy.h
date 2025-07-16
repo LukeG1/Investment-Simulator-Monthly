@@ -17,6 +17,7 @@ constexpr int num_factors = static_cast<int>(Economic_Factors::COUNT);
 class Economy
 {
 public:
+    // this may end up having to be a list
     // TODO: refactor to pointers
     // TODO: it seems like inflation adjusting everything would probably be a good idea for efficency
     Economic_Factor stock_market;
@@ -26,4 +27,4 @@ public:
     // Economic_Factor Real_Estate;
 };
 
-extern Economy economy;
+extern thread_local Economy *economy; // TODO: refactor to pointer

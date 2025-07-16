@@ -5,6 +5,8 @@
 #include "Economy/Economic_Factor.h"
 #include <Economy/Economy.h>
 
+// #define ALLOW_ACCOUNT(type) (household.accounts[static_cast<int>(type)])
+
 // TODO : this has to be updated and the household list has to be updated in the same order, that sucks
 enum class Accounts
 {

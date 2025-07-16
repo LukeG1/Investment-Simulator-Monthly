@@ -76,7 +76,7 @@ void Economic_Factor::generateGBMReturns()
     for (int i = 0; i < MAX_RETURN_HISTORY; ++i)
     {
         // Generate random standard normal variable
-        double z = normal_dist(global_RNG);
+        double z = normal_dist(*global_RNG);
 
         // GBM log returns: log(1 + r_t) = (mu - 0.5 * sigma^2) + sigma * z
         double log_return = (mu - 0.5f * sigma * sigma) + sigma * z;

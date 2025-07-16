@@ -1,5 +1,4 @@
 #include "Simulation/simulation.h"
-#include "Mortality/Period_Life_Data.h"
 #include "global_rng.h"
 #include "Economy/Economic_Factor.h"
 #include "Economy/Economy.h"
@@ -7,17 +6,106 @@
 #include "Household/Household.h"
 
 // initalize the global randomness with a seed
-std::mt19937 global_RNG{std::random_device{}()};
 
 // this is the economy that will be accessed everywhere
-Economy economy;
-
-int main()
+// TODO: should probably be refactored to not be global, or thread_local
+// household could also be thread_local therefore not passed so much?
+thread_local std::mt19937 *global_RNG;
+thread_local Economy *economy;
+thread_local Household *household;
+int main(int argc, char *argv[])
 {
-    auto household = Household(26, 0, 100'000);
+    // TODO: check that there is exactly one argument
 
-    auto period_life_data = Period_Life_Data(2002, Sex::Male);
-    for (auto _ = 0; _ < 100'000; _++)
-        simulate_lifetime(period_life_data);
+    // create a household based on the spec
+    // eventually the spec should probably contain setup info somewhere
+    global_RNG = new std::mt19937(std::random_device{}());
+    economy = new Economy();
+    // std::cout << "Using seed: " << global_RNG.default_seed << std::endl;
+    household = new Household(argv[1]);
+
+    for (auto _ = 0; _ < 1'000'000; _++)
+        simulate_lifetime();
     return 0;
 }
+
+// TODO: add a flag for the multithreaded version
+// #include "Simulation/simulation.h"
+// #include "global_rng.h"
+// #include "Economy/Economic_Factor.h"
+// #include "Economy/Economy.h"
+// #include "Accounts/HYSA.h"
+// #include "Household/Household.h"
+// #include <iostream>
+// #include <vector>
+// #include <thread>
+// #include <numeric> // For std::iota
+
+// // thread_local variables
+// thread_local std::mt19937 *global_RNG;
+// thread_local Economy *economy;
+// thread_local Household *household;
+
+// // Function that each thread will execute
+// void run_simulations_for_thread(int num_simulations_per_thread, const char *household_spec_file)
+// {
+//     // std::cout << "before globals" << std::endl;
+//     global_RNG = new std::mt19937(std::random_device{}());
+//     economy = new Economy();
+//     household = new Household(household_spec_file);
+//     // std::cout << "after globals" << std::endl;
+
+//     for (int i = 0; i < num_simulations_per_thread; ++i)
+//     {
+//         simulate_lifetime();
+//     }
+
+//     // Clean up per-thread resources
+//     delete household;
+//     delete economy;
+//     delete global_RNG;
+// }
+
+// int main(int argc, char *argv[])
+// {
+//     if (argc != 2)
+//     {
+//         std::cerr << "Usage: " << argv[0] << " <household_spec_file>" << std::endl;
+//         return 1;
+//     }
+
+//     const int total_simulations = 1'000'000;
+//     unsigned int num_threads = std::thread::hardware_concurrency(); // Get recommended number of threads
+//     if (num_threads == 0)
+//     {                    // Fallback if hardware_concurrency returns 0
+//         num_threads = 4; // Or some other sensible default
+//         std::cerr << "Warning: hardware_concurrency returned 0, defaulting to 4 threads." << std::endl;
+//     }
+
+//     int simulations_per_thread = total_simulations / num_threads;
+//     int remaining_simulations = total_simulations % num_threads;
+
+//     std::vector<std::thread> threads;
+//     threads.reserve(num_threads);
+
+//     for (unsigned int i = 0; i < num_threads; ++i)
+//     {
+//         int current_thread_sims = simulations_per_thread;
+//         if (i < remaining_simulations)
+//         { // Distribute remaining simulations to the first few threads
+//             current_thread_sims++;
+//         }
+//         threads.emplace_back(run_simulations_for_thread, current_thread_sims, argv[1]);
+//     }
+
+//     for (std::thread &t : threads)
+//     {
+//         if (t.joinable())
+//         {
+//             t.join();
+//         }
+//     }
+
+//     std::cout << total_simulations << " lifetime simulations completed using " << num_threads << " threads." << std::endl;
+//     return 0;
+// }

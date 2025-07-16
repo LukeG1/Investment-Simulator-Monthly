@@ -68,7 +68,7 @@ Period_Life_Data::Period_Life_Data(int birth_year, Sex sex)
 // check if they died based on the probability associed with their age
 bool Period_Life_Data::did_die_at_age(int age)
 {
-    double random_result = Period_Life_Data::dist(global_RNG);
+    double random_result = Period_Life_Data::dist(*global_RNG);
     float probability_of_death = probabilities_by_age[age > DATA_MAX_AGE ? DATA_MAX_AGE - 1 : age];
 
     if (random_result < probability_of_death)

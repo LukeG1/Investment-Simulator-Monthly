@@ -4,9 +4,10 @@
 
 HYSA::HYSA()
 {
+    // TODO: consider making this into some kind of macro
     // investments[static_cast<int>(Economic_Factors::Cash)] = new Investment{0.0f, nullptr};
-    investments[static_cast<int>(Economic_Factors::Stock_Market)] = new Investment{0.0f, &economy.stock_market};
-    investments[static_cast<int>(Economic_Factors::Bonds)] = new Investment{0.0f, &economy.bonds};
+    investments[static_cast<int>(Economic_Factors::Stock_Market)] = new Investment{0.0f, &economy->stock_market};
+    investments[static_cast<int>(Economic_Factors::Bonds)] = new Investment{0.0f, &economy->bonds};
 }
 
 double HYSA::max_contribution() // TODO: implement
