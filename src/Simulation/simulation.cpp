@@ -20,7 +20,6 @@ void simulate_month(int index)
 void simulate_lifetime()
 {
     hysa = new HYSA();
-    // rng for the month of attempted murder (0-11 for January-December)
     std::uniform_int_distribution<> distrib_month(0, 11);
 
     int years_old = household->starting_age_years;
@@ -29,7 +28,7 @@ void simulate_lifetime()
 
     while (true) // alive
     {
-        int month_of_death_test = distrib_month(*global_RNG); // Random month for an attempt (0-11)
+        int month_of_death_test = distrib_month(*global_RNG);
 
         for (int month_of_year = 0; month_of_year < 12; ++month_of_year)
         {
@@ -39,7 +38,7 @@ void simulate_lifetime()
                 // The user died
                 // std::cout << "Final Age (years, months): (" << years_old << ", " << month_of_year << ")" << std::endl;
                 // account.print_balances();
-                // delete hysa;
+                delete hysa;
                 return; // Exit the function
             }
 

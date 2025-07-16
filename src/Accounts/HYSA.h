@@ -15,4 +15,6 @@ public:
     // Override methods
     double max_contribution() override;
     void withdrawal(double amount, Economic_Factors ef) override;
+
+    double tot();
 };

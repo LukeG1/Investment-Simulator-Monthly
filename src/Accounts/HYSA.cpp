@@ -24,4 +24,10 @@ void HYSA::withdrawal(double amount, Economic_Factors ef)
     {
         withdrawaling_investment->balance -= amount;
     }
+};
+
+double HYSA::tot()
+{
+    double total = investments[static_cast<int>(Economic_Factors::Stock_Market)]->balance;
+    return total;
 }

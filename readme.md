@@ -49,6 +49,8 @@ There will be 2 modes of operation, when exploring differnt paths, the only thin
 -   [Dow Jones](https://fred.stlouisfed.org/series/M1109BUSM293NNBR)(total market analog) 1915+
 -   Still looking for better stock market representations
 -   Still looking for annuity data
+-   would be better to have small medium and large cap as well
+-   include international markets?
 -   [Home Prices](https://fred.stlouisfed.org/series/MSPUS) 1965+
 -   Still looking for rent data
 -   [Moody's AAA Corporate bonds](https://fred.stlouisfed.org/series/AAA) 1920+
