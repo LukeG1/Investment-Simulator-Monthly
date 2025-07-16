@@ -5,12 +5,14 @@
 #include "global_rng.h"
 #include "Accounts/HYSA.h"
 
-auto account = HYSA();
+#define DEPOSIT(account, amount, ef) ((account)->deposit(amount, ef))
+
+auto hysa = HYSA();
 
 void simulate_month(int index)
 {
-    account.deposit(100, Economic_Factors::Stock_Market);
-    account.increment(index);
+    DEPOSIT(&hysa, 100, Economic_Factors::Stock_Market);
+    hysa.increment(index);
 }
 
 // TODO: it would be nice if simulate_lifetime took a household, a government, and an economy

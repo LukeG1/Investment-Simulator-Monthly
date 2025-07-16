@@ -1,0 +1,20 @@
+{
+    "Contributors": [
+        {
+            "age": {
+                "years": 26,
+                "months": 0
+            },
+            "longevity_report":{}
+        }
+    ],
+    "incomes": [
+        {
+            "amount": 115000
+        },
+        {
+            "amount": 65000
+        }
+    ],
+    "starting_balances":{}
+}
