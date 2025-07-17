@@ -34,6 +34,9 @@ Icon?
 # zed
 .zed/
 
+#cache
+.cache
+
 # Jupyter notebooks' cache and checkpoints (if relevant)
 .ipynb_checkpoints/
 
