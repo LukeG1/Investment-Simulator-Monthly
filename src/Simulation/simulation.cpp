@@ -10,7 +10,7 @@
 
 #define DEPOSIT(account, ef, amount) (household->portfolio[account]->deposit(amount, ef))
 #define WITHDRAW(account, ef, amount) (account)
-// #define TRANSFER(from_account, from_ef, to_account, to_ef, amount) ()
+#define TRANSFER(from_account, from_ef, to_account, to_ef, amount) (from_account)
 
 thread_local HYSA *hysa;
 void simulate_month(int index)
@@ -25,8 +25,8 @@ void simulate_month(int index)
     WITHDRAW(Accounts::Checking, Economic_Factors::Cash, expenses);
 
     // step 3: distribute remainder according to the strategy
-
-
+    TRANSFER(Accounts::Checking, Economic_Factors::Cash, Accounts::Savings, Economic_Factors::Cash, 1'000);
+    TRANSFER(Accounts::Checking, Economic_Factors::Cash, Accounts::Brokerage, Economic_Factors::Stock_Market, 5'000);
 
     // step N: increment all accounts
     household->increment_portfolio(index);

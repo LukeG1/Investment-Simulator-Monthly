@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
     economy = new Economy();
     household = new Household(argv[1]);
 
+
     for (auto _ = 0; _ < num_simulations; _++)
         simulate_lifetime();
         // reset somehow?

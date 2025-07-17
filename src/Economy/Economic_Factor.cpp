@@ -50,8 +50,12 @@ Economic_Factor::Economic_Factor(const std::string &file_path)
 double Economic_Factor::get_return(int month, bool include_inflation)
 {
     double current_return = returns[month];
-    double inflation = economy->factors[static_cast<int>(Economic_Factors::Inflation)]->get_return(month, false);
-    return include_inflation ? current_return - inflation : current_return;
+    double inflation = 0.0;
+    if (include_inflation)
+    {
+        inflation = economy->factors[static_cast<int>(Economic_Factors::Inflation)]->get_return(month, false);
+    }
+    return current_return - inflation;
 }
 
 void Economic_Factor::calculateStatistics()
