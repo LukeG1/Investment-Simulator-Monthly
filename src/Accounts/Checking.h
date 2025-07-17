@@ -3,10 +3,10 @@
 #include "Accounts/Account.h"
 #include "Economy/Economic_Factor.h"
 
-class Brokerage : public Account
+class Checking : public Account
 {
 public:
-    Brokerage();
+    Checking();
 
     // Override methods
     double max_contribution() override;

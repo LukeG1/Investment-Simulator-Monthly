@@ -7,8 +7,6 @@
 #include <Economy/Economy.h>
 #include <unordered_map>
 
-#define ALLOW_ACCOUNT(type) ( allowed_factors.set(static_cast<int>(type)) )
-
 // TODO : this has to be updated and the household list has to be updated in the same order, that sucks
 enum class Accounts
 {
@@ -42,5 +40,6 @@ public:
 
     // abstract methods
     virtual double max_contribution() = 0;
+    // TBD how this will work
     virtual void withdrawal(double amount, Economic_Factors ef) = 0;
 };

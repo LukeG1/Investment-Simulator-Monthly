@@ -1,10 +1,11 @@
 #include "Accounts/Account.h"
 #include "HYSA.h"
 #include "Economy/Economy.h"
+#include "Household/Household.h"
 
 HYSA::HYSA()
 {
-    balances[Economic_Factors::Stock_Market] = 0.0;
+    balances[Economic_Factors::HYSA] = 0.0;
 }
 
 double HYSA::max_contribution() // TODO: implement

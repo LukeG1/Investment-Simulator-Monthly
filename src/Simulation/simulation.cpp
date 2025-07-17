@@ -1,19 +1,27 @@
 #include <iostream>
 #include <random>
 #include <chrono>
+#include "Accounts/Account.h"
 #include "Mortality/Period_Life_Data.h"
 #include "global_rng.h"
 #include "Accounts/HYSA.h"
 #include "simulation.h"
 #include "Household/Household.h"
 
-#define DEPOSIT(account, ef, amount) ((account)->deposit(amount, ef))
+#define DEPOSIT(account, ef, amount) (household->portfolio[account]->deposit(amount, ef))
 
 thread_local HYSA *hysa;
 void simulate_month(int index)
 {
-    DEPOSIT(hysa, Economic_Factors::Stock_Market, 100);
-    hysa->increment(index);
+    double income = household->starting_income/12.0;
+    DEPOSIT(Accounts::Checking, Economic_Factors::Cash, income);
+
+
+
+
+
+    // TODO: increment all accounts
+    // household->increment_portfolio();
 }
 
 // TODO: it would be nice if simulate_lifetime took a household, a government, and an economy
@@ -37,7 +45,6 @@ void simulate_lifetime()
             {
                 // The user died
                 // std::cout << "Final Age (years, months): (" << years_old << ", " << month_of_year << ")" << std::endl;
-                // account.print_balances();
                 // hysa->print_balances();
                 delete hysa;
                 return; // Exit the function

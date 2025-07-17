@@ -46,6 +46,7 @@ There will be 2 modes of operation, when exploring differnt paths, the only thin
 
 -   [CPI](https://fred.stlouisfed.org/series/CPIAUCSL) 1950+
 -   [Inflation](https://fred.stlouisfed.org/series/FPCPITOTLZGUSA) 1965+
+  - https://www.usinflationcalculator.com/monthly-us-inflation-rates-1913-present/
 -   [Dow Jones](https://fred.stlouisfed.org/series/M1109BUSM293NNBR)(total market analog) 1915+
 -   Still looking for better stock market representations
 -   Still looking for annuity data

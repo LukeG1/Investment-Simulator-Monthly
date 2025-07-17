@@ -1,17 +1,18 @@
 {
-    "Contributors": [
-        {
-            "age": {
-                "birth_year": 2002,
-                "years": 26,
-                "months": 0
-            },
-            "sex": "m",
-            "longevity_report":{},
-            "income": 115000
-        }
-    ],
-    "starting_balances":{
-        "HYSA": 16000
+  "Contributors": [
+    {
+      "age": {
+        "birth_year": 2002,
+        "years": 26,
+        "months": 0
+      },
+      "sex": "m",
+      "longevity_report": {},
+      "income": 115000
     }
+  ],
+  "starting_balances": {
+    "HYSA": 16000
+  },
+  "married": true
 }

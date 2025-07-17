@@ -1,4 +1,5 @@
 #pragma once
+
 #include "Accounts/Account.h"
 #include "json.hpp"
 #include "Mortality/Period_Life_Data.h"
@@ -29,9 +30,12 @@ public:
     int starting_age_months;
     int starting_income;
     Sex sex;
+    bool married;
 
     Period_Life_Data *period_life_data; // TODO: this should be a vector of period life data for each contributor
 
+
+    std::unordered_map<Accounts, Account*> portfolio;
     // TODO: household debug print function
 };
 

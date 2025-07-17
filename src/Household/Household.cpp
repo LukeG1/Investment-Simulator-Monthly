@@ -1,4 +1,6 @@
 #include "Household.h"
+#include "Accounts/Brokerage.h"
+#include "Accounts/Checking.h"
 #include "Accounts/HYSA.h"
 #include "json.hpp"
 #include <fstream> // For reading from a file
@@ -41,8 +43,13 @@ Household::Household(std::string spec_path)
     starting_age_months = data["Contributors"][0]["age"]["months"];
     starting_income = data["Contributors"][0]["income"];
     sex = data["Contributors"][0]["sex"] == "m" ? Sex::Male : Sex::Female;
+    married = data["married"];
+
+
 
     period_life_data = new Period_Life_Data(birth_year, sex);
-
-    // std::cout << data["Contributors"][0]["income"] << std::endl;
+    // initalize accounts
+    portfolio[Accounts::Checking] = new Checking();
+    portfolio[Accounts::HYSA] = new HYSA();
+    portfolio[Accounts::Brokerage] = new Brokerage();
 }

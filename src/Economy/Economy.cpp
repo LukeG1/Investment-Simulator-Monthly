@@ -9,4 +9,7 @@
 Economy::Economy(){
     // TODO: repeat for each factor
     INITALIZE_FACTOR(Economic_Factors::Stock_Market, "./data/dow_jones_historic.csv");
+    INITALIZE_FACTOR(Economic_Factors::Inflation, "./data/inflation_historic.csv");
+    INITALIZE_FACTOR(Economic_Factors::Bonds, "./data/corporate_bonds_historic.csv");
+    INITALIZE_FACTOR(Economic_Factors::HYSA, "./data/hysa_analog_historic.csv");
 }
