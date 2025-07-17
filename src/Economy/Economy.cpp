@@ -1,7 +1,12 @@
 #include "Economy.h"
 #include "Economic_Factor.h"
+#include <iostream>
+
+#define INITALIZE_FACTOR(factor, path) ( factors[static_cast<int>(factor)] = new Economic_Factor(path) );
+
 
 // Constructor definition
-Economy::Economy()
-    : stock_market("./data/dow_jones_historic.csv"),
-      bonds("./data/dow_jones_historic.csv") {};
+Economy::Economy(){
+    // TODO: repeat for each factor
+    INITALIZE_FACTOR(Economic_Factors::Stock_Market, "./data/dow_jones_historic.csv");
+}

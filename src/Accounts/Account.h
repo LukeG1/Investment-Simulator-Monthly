@@ -2,10 +2,11 @@
 
 #include <iostream>
 #include <array>
+#include <bitset>
 #include "Economy/Economic_Factor.h"
 #include <Economy/Economy.h>
 
-// #define ALLOW_ACCOUNT(type) (household.accounts[static_cast<int>(type)])
+#define ALLOW_ACCOUNT(type) ( allowed_factors.set(static_cast<int>(type)) )
 
 // TODO : this has to be updated and the household list has to be updated in the same order, that sucks
 enum class Accounts
@@ -27,23 +28,14 @@ enum class Accounts
 
 constexpr int num_accounts = static_cast<int>(Accounts::COUNT);
 
-class Investment
-{
-public:
-    double balance;
-    Economic_Factor *economic_factor;
-};
-
 // TODO: households need to be factored in somehow, i.e. where do deposits and withdrawls come from / go?
 class Account
 {
 protected:
-    // TODO: consider better pointers
-    // TODO: also consider profiling this with a map instead of array since it is technically sparse though small
-    std::array<Investment *, num_factors> investments{};
+    std::bitset<num_factors> allowed_factors;
+    std::array<double , num_factors> balances{};
 
 public:
-    virtual ~Account();
     void deposit(double amount, Economic_Factors ef);
     void increment(int month);
     void print_balances();

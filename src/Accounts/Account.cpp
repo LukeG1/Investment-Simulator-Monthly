@@ -2,46 +2,38 @@
 #include <iomanip>
 #include <sstream>
 
-Account::~Account()
-{
-    for (auto &inv : investments)
-    {
-        delete inv;
-    }
-}
-
 void Account::deposit(double amount, Economic_Factors ef)
 {
+    // TODO: household considerations (how much can they deposit?)
     int idx = static_cast<int>(ef);
-    Investment *depositing_investment = investments[idx];
-    // std::cout << "Depositing " << amount << " into " << static_cast<int>(ef) << std::endl;
-    if (depositing_investment && amount <= max_contribution())
+    if (allowed_factors.test(idx) && amount <= max_contribution())
     {
-        depositing_investment->balance += amount;
+        balances[idx] += amount;
     }
+    // std::cout << "Depositing " << amount << " into " << static_cast<int>(ef) << std::endl;
 }
 
 void Account::increment(int month)
 {
-    for (auto &investment : investments)
-    {
-        if (investment)
-        {
-            double monthly_return = investment->economic_factor->get_return(month, false);
-            investment->balance *= (1 + monthly_return);
-        }
+    for(int i =0; i<num_factors; i++){
+        // not sure if this should stay long term
+        if(!economy->factors[i])
+            continue;
+        double monthly_return = economy->factors[i]->get_return(month, false);
+        balances[i] *= (1 + monthly_return);
     }
 }
 
 void Account::print_balances()
 {
-    for (int i = 0; i < num_factors; ++i)
+
+    for (int i = 0; i < balances.size(); ++i)
     {
-        if (investments[i])
+        if (allowed_factors.test(i))
         {
             std::cout << "Balance for " << static_cast<int>(static_cast<Economic_Factors>(i)) << ": $"
                       << std::fixed << std::setprecision(2)
-                      << std::showbase << investments[i]->balance << std::endl;
+                      << std::showbase << balances[i] << std::endl;
         }
     }
 };

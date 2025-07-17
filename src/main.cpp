@@ -4,7 +4,7 @@
 #include "global_rng.h"
 #include <random>
 
-int num_simulations = 100'000;
+int num_simulations = 1'000'000;
 
 #ifndef MULTITHREADING_ENABLED
 // this is the economy that will be accessed everywhere
@@ -97,6 +97,6 @@ int main(int argc, char *argv[])
         }
     }
 
-    std::cout << total_simulations << "lifetime simulations completed using" << num_threads << " threads." << std::endl; return 0;
+    std::cout << total_simulations << " lifetime simulations completed using " << num_threads << " threads." << std::endl; return 0;
 }
 #endif
