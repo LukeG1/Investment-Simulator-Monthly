@@ -5,6 +5,7 @@
 #include <bitset>
 #include "Economy/Economic_Factor.h"
 #include <Economy/Economy.h>
+#include <unordered_map>
 
 #define ALLOW_ACCOUNT(type) ( allowed_factors.set(static_cast<int>(type)) )
 
@@ -32,8 +33,7 @@ constexpr int num_accounts = static_cast<int>(Accounts::COUNT);
 class Account
 {
 protected:
-    std::bitset<num_factors> allowed_factors;
-    std::array<double , num_factors> balances{};
+    std::unordered_map<Economic_Factors, double> balances;
 
 public:
     void deposit(double amount, Economic_Factors ef);

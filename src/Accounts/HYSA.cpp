@@ -4,7 +4,7 @@
 
 HYSA::HYSA()
 {
-    ALLOW_ACCOUNT(Economic_Factors::Stock_Market);
+    balances[Economic_Factors::Stock_Market] = 0.0;
 }
 
 double HYSA::max_contribution() // TODO: implement
@@ -15,15 +15,15 @@ double HYSA::max_contribution() // TODO: implement
 void HYSA::withdrawal(double amount, Economic_Factors ef)
 {
     // TODO: consider tax implications
-    int idx = static_cast<int>(ef);
-    if (allowed_factors.test(idx) && amount <= balances[idx])
-    {
-        balances[idx] -= amount;
-    }
+    // int idx = static_cast<int>(ef);
+    // if (allowed_factors.test(idx) && amount <= balances[idx])
+    // {
+    //     balances[idx] -= amount;
+    // }
 };
 
 double HYSA::tot()
 {
-    double total = balances[static_cast<int>(Economic_Factors::Stock_Market)];
+    double total = balances[Economic_Factors::Stock_Market];
     return total;
 }

@@ -7,12 +7,12 @@
 #include "simulation.h"
 #include "Household/Household.h"
 
-#define DEPOSIT(account, amount, ef) ((account)->deposit(amount, ef))
+#define DEPOSIT(account, ef, amount) ((account)->deposit(amount, ef))
 
 thread_local HYSA *hysa;
 void simulate_month(int index)
 {
-    DEPOSIT(hysa, 100, Economic_Factors::Stock_Market);
+    DEPOSIT(hysa, Economic_Factors::Stock_Market, 100);
     hysa->increment(index);
 }
 
@@ -38,6 +38,7 @@ void simulate_lifetime()
                 // The user died
                 // std::cout << "Final Age (years, months): (" << years_old << ", " << month_of_year << ")" << std::endl;
                 // account.print_balances();
+                // hysa->print_balances();
                 delete hysa;
                 return; // Exit the function
             }
