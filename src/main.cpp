@@ -1,7 +1,7 @@
-#include "Simulation/simulation.h"
-#include "global_rng.h"
 #include "Economy/Economy.h"
 #include "Household/Household.h"
+#include "Simulation/simulation.h"
+#include "global_rng.h"
 
 // initalize the global randomness with a seed
 
@@ -15,11 +15,8 @@ int main(int argc, char *argv[])
 {
     // TODO: check that there is exactly one argument
 
-    // create a household based on the spec
-    // eventually the spec should probably contain setup info somewhere
     global_RNG = new std::mt19937(std::random_device{}());
     economy = new Economy();
-    // std::cout << "Using seed: " << global_RNG.default_seed << std::endl;
     household = new Household(argv[1]);
 
     for (auto _ = 0; _ < 1'000'000; _++)
@@ -45,7 +42,8 @@ int main(int argc, char *argv[])
 // thread_local Household *household;
 
 // // Function that each thread will execute
-// void run_simulations_for_thread(int num_simulations_per_thread, const char *household_spec_file)
+// void run_simulations_for_thread(int num_simulations_per_thread, const char
+// *household_spec_file)
 // {
 //     // std::cout << "before globals" << std::endl;
 //     global_RNG = new std::mt19937(std::random_device{}());
@@ -68,16 +66,17 @@ int main(int argc, char *argv[])
 // {
 //     if (argc != 2)
 //     {
-//         std::cerr << "Usage: " << argv[0] << " <household_spec_file>" << std::endl;
-//         return 1;
+//         std::cerr << "Usage: " << argv[0] << " <household_spec_file>" <<
+//         std::endl; return 1;
 //     }
 
 //     const int total_simulations = 1'000'000;
-//     unsigned int num_threads = std::thread::hardware_concurrency(); // Get recommended number of threads
-//     if (num_threads == 0)
-//     {                    // Fallback if hardware_concurrency returns 0
+//     unsigned int num_threads = std::thread::hardware_concurrency(); // Get
+//     recommended number of threads if (num_threads == 0) { // Fallback if
+//     hardware_concurrency returns 0
 //         num_threads = 4; // Or some other sensible default
-//         std::cerr << "Warning: hardware_concurrency returned 0, defaulting to 4 threads." << std::endl;
+//         std::cerr << "Warning: hardware_concurrency returned 0, defaulting to
+//         4 threads." << std::endl;
 //     }
 
 //     int simulations_per_thread = total_simulations / num_threads;
@@ -93,7 +92,8 @@ int main(int argc, char *argv[])
 //         { // Distribute remaining simulations to the first few threads
 //             current_thread_sims++;
 //         }
-//         threads.emplace_back(run_simulations_for_thread, current_thread_sims, argv[1]);
+//         threads.emplace_back(run_simulations_for_thread, current_thread_sims,
+//         argv[1]);
 //     }
 
 //     for (std::thread &t : threads)
@@ -104,6 +104,6 @@ int main(int argc, char *argv[])
 //         }
 //     }
 
-//     std::cout << total_simulations << " lifetime simulations completed using " << num_threads << " threads." << std::endl;
-//     return 0;
+//     std::cout << total_simulations << " lifetime simulations completed using
+//     " << num_threads << " threads." << std::endl; return 0;
 // }
