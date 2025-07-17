@@ -20,6 +20,8 @@ class Household
 public:
     // Household(int starting_age_years, int starting_age_months, int starting_income);
     Household(std::string spec_path);
+
+    void increment_portfolio(int month);
     // A household should have all the accounts wheather or not they are used for simplicity
     // different strategies may end up employing different accounts
     std::array<Account *, 5> accounts{};

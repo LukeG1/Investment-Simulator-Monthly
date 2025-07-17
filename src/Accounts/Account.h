@@ -37,6 +37,7 @@ public:
     void deposit(double amount, Economic_Factors ef);
     void increment(int month);
     void print_balances();
+    double total_balance();
 
     // abstract methods
     virtual double max_contribution() = 0;

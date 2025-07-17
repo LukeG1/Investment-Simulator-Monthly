@@ -9,19 +9,27 @@
 #include "Household/Household.h"
 
 #define DEPOSIT(account, ef, amount) (household->portfolio[account]->deposit(amount, ef))
+#define WITHDRAW(account, ef, amount) (account)
+// #define TRANSFER(from_account, from_ef, to_account, to_ef, amount) ()
 
 thread_local HYSA *hysa;
 void simulate_month(int index)
 {
-    double income = household->starting_income/12.0;
+    // step 1: earn income
+    double income = household->starting_income/12.0; // actually compute income
     DEPOSIT(Accounts::Checking, Economic_Factors::Cash, income);
+    int cash_on_hand = household->portfolio[Accounts::Checking]->total_balance();
+
+    // step 2: pay expenses
+    double expenses = 1000; // actually compute expenses
+    WITHDRAW(Accounts::Checking, Economic_Factors::Cash, expenses);
+
+    // step 3: distribute remainder according to the strategy
 
 
 
-
-
-    // TODO: increment all accounts
-    // household->increment_portfolio();
+    // step N: increment all accounts
+    household->increment_portfolio(index);
 }
 
 // TODO: it would be nice if simulate_lifetime took a household, a government, and an economy

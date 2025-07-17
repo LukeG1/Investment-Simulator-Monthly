@@ -53,3 +53,10 @@ Household::Household(std::string spec_path)
     portfolio[Accounts::HYSA] = new HYSA();
     portfolio[Accounts::Brokerage] = new Brokerage();
 }
+
+void Household::increment_portfolio(int month)
+{
+    for (const auto& pair : portfolio) {
+        pair.second->increment(month);
+    }
+}

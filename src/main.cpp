@@ -4,7 +4,7 @@
 #include "global_rng.h"
 #include <random>
 
-int num_simulations = 1'000'000;
+int num_simulations = 1;
 
 #ifndef MULTITHREADING_ENABLED
 // this is the economy that will be accessed everywhere
@@ -22,6 +22,7 @@ int main(int argc, char *argv[])
 
     for (auto _ = 0; _ < num_simulations; _++)
         simulate_lifetime();
+        // reset somehow?
 
     return 0;
 

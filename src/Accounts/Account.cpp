@@ -30,3 +30,14 @@ void Account::print_balances()
                   << std::showbase << pair.second << std::endl;
     }
 };
+
+
+double Account::total_balance()
+{
+    double total = 0.0;
+    for (const auto& pair : balances) {
+        total += pair.second;
+    }
+
+    return total;
+};
