@@ -1,6 +1,6 @@
 # Motivation
 
-I've struggled over decisions like Roth or traditional, rent or buy, stock bond ratios, standard or itemized, when to start social secutiry benifits, are annuities a scam, and countless more. Every answer to these questions is probably the best choise for someone, but you still hear people saying oposite things to people in the same situation. I think that is partially because people have different goals, which is valid, but it's also becauase most people are making educated guesses based on gut feeling. I want a more empirically proven answer if I'm going to steak my livelehood on it. While this project obviosly wouldnt be the first to do such a thing, I want it to be comprehensive and simple enough to not just answer questions like these, but provide an optimal path based on anyone's inputs, to achieve thier goals.
+I've struggled over decisions like Roth or Traditional, rent or buy, stock bond ratios, standard or itemized, when to start social secutiry benifits, are annuities a scam, and countless more. Every answer to these questions is probably the best choise for someone, but you still hear people saying oposite things to people in the same situation. I think that is partially because people have different goals, which is valid, but it's also becauase most people are making educated guesses based on gut feeling. I want a more empirically proven answer if I'm going to steak my livelehood on it. While this project obviosly wouldnt be the first to do such a thing, I want it to be comprehensive and simple enough to not just answer questions like these, but provide an optimal path based on anyone's inputs, to achieve thier goals.
 
 # Overview
 
@@ -13,8 +13,8 @@ The goal of the project being to provide a user a path to their retirement goals
 
 ## Alternate Goals
 
--   Max median portfolio value
--   are there even any others?
+- Max median portfolio value
+- are there even any others?
 
 # Output Aggregation
 
@@ -23,16 +23,16 @@ To determine when a metric has "stabilized," I use a heuristic grounded in the C
 
 ## What the distribution learner tracks:
 
--   `mean`: Running mean of observed outcomes.
--   `count`: Total number of outcomes added.
--   `minVal`: Minimum observed value.
--   `maxVal`: Maximum observed value.
--   `varM2`: Second central moment (for variance calculation).
--   `skewM3`: Third central moment (for skewness calculation).
--   `kurtM4`: Fourth central moment (for kurtosis calculation).
--   `quantiles`: Map of quantile estimators (`0.25`, `0.5`, `0.75`) using the P² algorithm.
--   `precisionTarget`: Target width for confidence interval (used in stability checking).
--   `meanStability`: `StabilityChecker` instance tracking convergence of the mean.
+- `mean`: Running mean of observed outcomes.
+- `count`: Total number of outcomes added.
+- `minVal`: Minimum observed value.
+- `maxVal`: Maximum observed value.
+- `varM2`: Second central moment (for variance calculation).
+- `skewM3`: Third central moment (for skewness calculation).
+- `kurtM4`: Fourth central moment (for kurtosis calculation).
+- `quantiles`: Map of quantile estimators (`0.25`, `0.5`, `0.75`) using the P² algorithm.
+- `precisionTarget`: Target width for confidence interval (used in stability checking).
+- `meanStability`: `StabilityChecker` instance tracking convergence of the mean.
 
 ## Modes of operation
 
@@ -44,22 +44,27 @@ There will be 2 modes of operation, when exploring differnt paths, the only thin
 
 ## Historic Data
 
--   [CPI](https://fred.stlouisfed.org/series/CPIAUCSL) 1950+
--   [Inflation](https://fred.stlouisfed.org/series/FPCPITOTLZGUSA) 1965+
-  - https://www.usinflationcalculator.com/monthly-us-inflation-rates-1913-present/
--   [Dow Jones](https://fred.stlouisfed.org/series/M1109BUSM293NNBR)(total market analog) 1915+
--   Still looking for better stock market representations
--   Still looking for annuity data
--   would be better to have small medium and large cap as well
--   include international markets?
--   [Home Prices](https://fred.stlouisfed.org/series/MSPUS) 1965+
--   Still looking for rent data
--   [Moody's AAA Corporate bonds](https://fred.stlouisfed.org/series/AAA) 1920+
--   Still looking for good federal bond data
--   [Income](https://fred.stlouisfed.org/series/MEHOINUSA672N) 1985+
--   [Gold](https://nma.org/wp-content/uploads/2016/09/historic_gold_prices_1833_pres.pdf) 1850+
--   Still looking for silver and other precious metals
--   Still looking for data on HYSAs / General interest rate data
+- [Consumer Price Index (Inflation)](https://fred.stlouisfed.org/series/CPIAUCSL) 1950+
+- [Dow Jones](https://fred.stlouisfed.org/series/M1109BUSM293NNBR)(total market analog) 1915+
+- [Total Market](https://fred.stlouisfed.org/series/SPASTT01USM657N) 1957+
+- would be better to have small medium and large cap as well
+- Still looking for annuity data
+  - Consider reconstructing this? https://www.schwab.com/annuities/fixed-income-annuity-calculator - doesnt take into account historic changes
+- [International Markets](https://fred.stlouisfed.org/series/SPASTT01EZM661N)
+- [Home Prices](https://fred.stlouisfed.org/series/MSPUS) 1965+
+- [Rent](https://fred.stlouisfed.org/series/CUUR0000SEHA) 1914+
+- [Moody's AAA Corporate bonds](https://fred.stlouisfed.org/series/AAA) 1920+
+- [Federal Bonds](https://fred.stlouisfed.org/series/DGS10) 1962+
+- [Income](https://fred.stlouisfed.org/series/MEHOINUSA672N) 1985+
+- [Gold](https://www.macrotrends.net/1333/historical-gold-prices-100-year-chart) 1915+
+- [Silver](https://www.macrotrends.net/1470/historical-silver-prices-100-year-chart) 1915+
+- Still looking for data on HYSAs / General interest rate data
+
+- Data Types:
+  - simple monthly return
+  - yearly return updated monthly
+  - indexes (like CPI)
+  - values (i.e. $n invested over time)
 
 ## Tax Data
 
@@ -71,10 +76,16 @@ There will be 2 modes of operation, when exploring differnt paths, the only thin
 
 ## Life Expectancy / Health
 
--   [Male](https://www.mortality.org/File/GetDocument/hmd.v6/USA/STATS/mltper_1x1.txt)
--   [Female](https://www.mortality.org/File/GetDocument/hmd.v6/USA/STATS/fltper_1x1.txt)
--   Still looking for data on multipliers for good or poor habits / health / family history
--   Still looking for data on medical expenses?
+- [Male](https://www.mortality.org/File/GetDocument/hmd.v6/USA/STATS/mltper_1x1.txt)
+- [Female](https://www.mortality.org/File/GetDocument/hmd.v6/USA/STATS/fltper_1x1.txt)
+- Still looking for data on multipliers for good or poor habits / health / family history
+- Still looking for data on medical expenses?
+
+## Inflation
+
+Inflation is dealt with via CPI, I feel like there is an opportunity to handle things by specific CPI rates instead of general
+I don't know if I should leave everything unaffected (i.e. in today's dollars) and just decrease market rates by CPI values
+alternative is to increase everything
 
 # Project Structure
 
@@ -105,9 +116,7 @@ This takes a household and data informed economic factors to run actual month by
 
 ## Structure
 
-thread 1: data collection thread
-thread 2: historic data simulation thread
-thread 3+: simulation threads
+unknown
 
 # Figuring out the inputs
 
@@ -122,14 +131,18 @@ choose what to save, like maybe only save means to save time for each investment
 
 # My notes:
 
--   Period_Life_Data could be used in an inheritance account to represent the parent
--   also the 'household' may technically need 2 of them for the 2 members
+- Period_Life_Data could be used in an inheritance account to represent the parent
+- also the 'household' may technically need 2 of them for the 2 members
 
-## Steps
+## Next Steps:
 
-1. Get a multithreded loop going over a number of years, over a number of sims
-2. Get various kinds of historic data reading into c++ economic factors with GBM
-
-while simulating, when accessing an economic factor you would do something like this:
-stock_market.return(random_seed, month_index)
-or at least that would be nice
+1. Implement some testing
+2. Create a flag for a heavy logging version and a light version
+   - consider if this flag should be in code or not
+3. Get as much data into the economy as possible
+4. Get more data into the household
+5. Some form of tax computation
+6. Profiling
+7. Household Factors need implemented
+8. Figure out taxable income vs regular / where income goes
+9. Try to write a basic strategy in code

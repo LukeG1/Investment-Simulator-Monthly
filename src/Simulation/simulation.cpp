@@ -1,12 +1,12 @@
-#include <iostream>
-#include <random>
-#include <chrono>
+#include "simulation.h"
 #include "Accounts/Account.h"
+#include "Accounts/HYSA.h"
+#include "Household/Household.h"
 #include "Mortality/Period_Life_Data.h"
 #include "global_rng.h"
-#include "Accounts/HYSA.h"
-#include "simulation.h"
-#include "Household/Household.h"
+#include <chrono>
+#include <iostream>
+#include <random>
 
 #define DEPOSIT(account, ef, amount) (household->portfolio[account]->deposit(amount, ef))
 #define WITHDRAW(account, ef, amount) (account)
@@ -16,7 +16,7 @@ thread_local HYSA *hysa;
 void simulate_month(int index)
 {
     // step 1: earn income
-    double income = household->starting_income/12.0; // actually compute income
+    double income = household->starting_income / 12.0; // actually compute income
     DEPOSIT(Accounts::Checking, Economic_Factors::Cash, income);
     int cash_on_hand = household->portfolio[Accounts::Checking]->total_balance();
 
@@ -52,8 +52,8 @@ void simulate_lifetime()
             if (month_of_year == month_of_death_test && household->period_life_data->did_die_at_age(years_old))
             {
                 // The user died
-                // std::cout << "Final Age (years, months): (" << years_old << ", " << month_of_year << ")" << std::endl;
-                // hysa->print_balances();
+                // std::cout << "Final Age (years, months): (" << years_old << ", " << month_of_year << ")" <<
+                // std::endl; hysa->print_balances();
                 delete hysa;
                 return; // Exit the function
             }
