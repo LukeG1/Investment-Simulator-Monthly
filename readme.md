@@ -12,7 +12,10 @@ The secondary objective is to then use the results of that simulation to try mes
 The goal of the project being to provide users a path to their retirement goals that is most likley to succede, it feels important to define what I see as the most rational main goal. which is minimizing what I've been calling PPF: Probabilty of Portfolio Failure. $\hat{P} = \frac{ \text{\\# of portfolio failures before death}}{\text{total number of simulations}}$ The more I've thought about it the more rational it feels to choose a path that has any ammount lower PPF, even if it means a significant sacrifice in potiental portfolio value. That being said there are more risk tollerant people than me, and there will inevitably be situations where you can have higher value with equal PPF, so net worth should be tracked as a secondary goal.
 
 These 2 goals can be used as the axes of a scatter plot on which every strategy can be assessed depending on the user's risk tolerance.
-![Diagram](images/desired_output.png)
+
+<p align="center">
+  <img src="images/desired_output.png" alt="Diagram" />
+</p>
 
 ## Alternate Reward functions
 
