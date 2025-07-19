@@ -1,12 +1,12 @@
 #include "Economic_Factor.h"
+#include "Economy.h"
+#include "global_rng.h"
+#include <cmath>
 #include <fstream>
 #include <iostream>
-#include <cmath>
 #include <numeric>
 #include <random>
 #include <stdexcept>
-#include "global_rng.h"
-#include "Economy.h"
 
 // TODO: this needs a lot of testing
 Economic_Factor::Economic_Factor(const std::string &file_path)
@@ -53,7 +53,7 @@ double Economic_Factor::get_return(int month, bool include_inflation)
     double inflation = 0.0;
     if (include_inflation)
     {
-        inflation = economy->factors[static_cast<int>(Economic_Factors::Inflation)]->get_return(month, false);
+        inflation = economy->factors[static_cast<int>(Economic_Factors::Total_Inflation)]->get_return(month, false);
     }
     return current_return - inflation;
 }

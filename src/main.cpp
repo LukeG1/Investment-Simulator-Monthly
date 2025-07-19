@@ -4,7 +4,7 @@
 #include "global_rng.h"
 #include <random>
 
-int num_simulations = 1;
+int num_simulations = 100'000;
 
 #ifndef MULTITHREADING_ENABLED
 // this is the economy that will be accessed everywhere
@@ -20,22 +20,20 @@ int main(int argc, char *argv[])
     economy = new Economy();
     household = new Household(argv[1]);
 
-
     for (auto _ = 0; _ < num_simulations; _++)
         simulate_lifetime();
-        // reset somehow?
+    // reset somehow?
 
     return 0;
-
 }
 #endif
 
 #ifdef MULTITHREADING_ENABLED
 
 #include <iostream>
-#include <vector>
-#include <thread>
 #include <numeric> // For std::iota
+#include <thread>
+#include <vector>
 
 // thread_local variables
 thread_local std::mt19937 *global_RNG;
@@ -43,8 +41,7 @@ thread_local Economy *economy;
 thread_local Household *household;
 
 // Function that each thread will execute
-void run_simulations_for_thread(int num_simulations_per_thread, const char
-*household_spec_file)
+void run_simulations_for_thread(int num_simulations_per_thread, const char *household_spec_file)
 {
     // std::cout << "before globals" << std::endl;
     global_RNG = new std::mt19937(std::random_device{}());
@@ -67,8 +64,8 @@ int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
-        std::cerr << "Usage: " << argv[0] << " <household_spec_file>" <<
-        std::endl; return 1;
+        std::cerr << "Usage: " << argv[0] << " <household_spec_file>" << std::endl;
+        return 1;
     }
 
     const int total_simulations = num_simulations;
@@ -87,8 +84,7 @@ int main(int argc, char *argv[])
         { // Distribute remaining simulations to the first few threads
             current_thread_sims++;
         }
-        threads.emplace_back(run_simulations_for_thread, current_thread_sims,
-        argv[1]);
+        threads.emplace_back(run_simulations_for_thread, current_thread_sims, argv[1]);
     }
 
     for (std::thread &t : threads)
@@ -99,6 +95,8 @@ int main(int argc, char *argv[])
         }
     }
 
-    std::cout << total_simulations << " lifetime simulations completed using " << num_threads << " threads." << std::endl; return 0;
+    std::cout << total_simulations << " lifetime simulations completed using " << num_threads << " threads."
+              << std::endl;
+    return 0;
 }
 #endif

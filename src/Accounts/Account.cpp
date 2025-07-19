@@ -15,6 +15,7 @@ void Account::deposit(double amount, Economic_Factors ef)
 
 void Account::increment(int month)
 {
+    // TODO: remove extra map index
     for (const auto &[ef, balance] : balances)
     {
         auto *factor = economy->factors[static_cast<int>(ef)];

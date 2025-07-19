@@ -11,7 +11,7 @@ The secondary objective is to then use the results of that simulation to try mes
 
 The goal of the project being to provide users a path to their retirement goals that is most likley to succede, it feels important to define what I see as the most rational main goal. which is minimizing what I've been calling PPF: Probabilty of Portfolio Failure. $\hat{P} = \frac{ \text{\\# of portfolio failures before death}}{\text{total number of simulations}}$ The more I've thought about it the more rational it feels to choose a path that has any ammount lower PPF, even if it means a significant sacrifice in potiental portfolio value. That being said there are more risk tollerant people than me, and there will inevitably be situations where you can have higher value with equal PPF, so net worth should be tracked as a secondary goal.
 
-These 2 goals can be used as the axes of a scatter plot on which every strategy can be assessed depending on the user's risk tolerance.
+These 2 goals can be used as the axes of a scatter plot on which every strategy can be assessed depending on the user's risk tolerance. For my sake, I would only consider the very left side of this plot.
 
 <p align="center">
   <img src="images/desired_output.png" alt="Diagram" />
@@ -19,8 +19,8 @@ These 2 goals can be used as the axes of a scatter plot on which every strategy 
 
 ## Alternate Reward functions
 
-- Max median portfolio value
 - are there even any others?
+- you could have something like PPF vs retirement age
 
 # Output Aggregation
 
@@ -51,19 +51,19 @@ There will be 2 modes of operation, when exploring differnt paths, the only thin
 ## Historic Data
 
 - [Consumer Price Index (Inflation)](https://fred.stlouisfed.org/series/CPIAUCSL) 1950+
-- [Dow Jones](https://fred.stlouisfed.org/series/M1109BUSM293NNBR)(total market analog) 1915+
+- [Dow Jones](https://fred.stlouisfed.org/series/M1109BUSM293NNBR) 1915+
 - [Total Market](https://fred.stlouisfed.org/series/SPASTT01USM657N) 1957+
 - would be better to have small medium and large cap as well
 - Still looking for annuity data
   - Consider reconstructing this? https://www.schwab.com/annuities/fixed-income-annuity-calculator - doesnt take into account historic changes
 - [International Markets](https://fred.stlouisfed.org/series/SPASTT01EZM661N)
-- [Home Prices](https://fred.stlouisfed.org/series/MSPUS) 1965+
-- [Rent](https://fred.stlouisfed.org/series/CUUR0000SEHA) 1914+
 - [Moody's AAA Corporate bonds](https://fred.stlouisfed.org/series/AAA) 1920+
 - [Federal Bonds](https://fred.stlouisfed.org/series/DGS10) 1962+
-- [Income](https://fred.stlouisfed.org/series/MEHOINUSA672N) 1985+
 - [Gold](https://www.macrotrends.net/1333/historical-gold-prices-100-year-chart) 1915+
 - [Silver](https://www.macrotrends.net/1470/historical-silver-prices-100-year-chart) 1915+
+- [Home Prices](https://fred.stlouisfed.org/series/MSPUS) 1965+
+- [Income](https://fred.stlouisfed.org/series/MEHOINUSA672N) 1985+
+- [Rent](https://fred.stlouisfed.org/series/CUUR0000SEHA) 1914+
 - Still looking for data on HYSAs / General interest rate data
 
 - Data Types:
